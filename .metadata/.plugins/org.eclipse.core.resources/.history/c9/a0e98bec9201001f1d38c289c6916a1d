@@ -1,0 +1,9 @@
+package com.wcs.auth.service;
+
+import com.newgen.o2ms.entities.Component;
+
+import java.util.List;
+
+public interface ComponentService {
+   //// List<Component> getComponents();
+}

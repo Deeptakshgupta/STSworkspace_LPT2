@@ -1,0 +1,36 @@
+package com.wcs.user.service;
+
+
+
+import com.wcs.user.model.Deep_user;
+import com.wcs.user.security.AESEncryptionUtil;
+import com.wcs.user.security.UserRepository;
+
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
+public class UserServiceImpl implements UserService{
+	
+	private final UserRepository userRepository;
+
+	@Override
+	public void createUser(String username, String password) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Deep_user getUserByUsername(String username) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean authenticateUser(String username, String password) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	
+
+}

@@ -1,0 +1,12 @@
+package com.wcs.auth.repository;
+
+import org.springframework.data.repository.CrudRepository;
+
+import com.wcs.auth.model.User;
+
+import java.util.Optional;
+
+public interface UserRepository extends CrudRepository<User,Long> {
+    Optional<User> findByUserId(String userId);
+    Boolean existsByUserId(String UserId);
+}

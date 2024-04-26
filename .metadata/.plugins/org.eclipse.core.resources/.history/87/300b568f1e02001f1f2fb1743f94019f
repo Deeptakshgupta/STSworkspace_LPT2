@@ -1,0 +1,14 @@
+#Jpa setting............
+#Jpa setting............
+spring.datasource.url= jdbc:oracle:thin:@//192.168.55.81:1521/p1usutf
+spring.jpa.database= oracle
+spring.datasource.username=wcs
+spring.datasource.password=wcswcs
+spring.datasource.driver-class-name=oracle.jdbc.OracleDriver
+#spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.Oracle10gDialect
+spring.datasource.hikari.maximum-pool-size=10
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.format_sql=true
+
+

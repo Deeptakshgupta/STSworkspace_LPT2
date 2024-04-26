@@ -1,0 +1,131 @@
+// KEy generation
+package com.wcs.user.security;
+
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+import java.security.NoSuchAlgorithmException;
+import java.security.PrivateKey;
+import java.security.PublicKey;
+import java.util.Base64;
+
+import javax.crypto.Cipher;
+
+public class RSACipher {
+
+	private PublicKey publicKey;
+	private PrivateKey privateKey;
+	
+//	public RSACipher() {
+//		try {
+//			KeyPairGenerator generator = KeyPairGenerator.getInstance("RSA");
+//			generator.initialize(1024);
+//			KeyPair pair = generator.generateKeyPair();
+//			
+//		}
+//		catch(Exception ex)
+//		{
+//			ex.printStackTrace();
+//		}
+//	}
+	
+	public  void init() {
+		KeyPairGenerator generator;
+		try {
+			generator = KeyPairGenerator.getInstance("RSA");
+			generator.initialize(1024);
+			KeyPair pair = generator.generateKeyPair();
+			
+			privateKey= pair.getPrivate();
+			publicKey = pair.getPublic();
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch blocksc
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
+	public  void printKeys() {
+		System.err.println("public key :\n"+encode(publicKey.getEncoded());
+		System.err.println("private key :\n"+encode(privateKey.getEncoded());
+		//System.err.println("public key :\n"+publicKey);
+		//System.err.println("private key :\n"+privateKey);
+	}
+	
+	public String encrypt(String message) throws Exception{
+		byte[] messageToBytes = message.getBytes();
+		Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
+		cipher.init(Cipher.ENCRYPT_MODE, publicKey);
+		byte[] encryptedBytes = cipher.doFinal(messageToBytes);
+		return encode(encryptedBytes);
+				
+	}
+	
+	public String decrypt(String encryptedMessage) throws Exception{
+		byte[] encryptedBytes = decode(encryptedMessage);
+		Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
+		cipher.init(Cipher.DECRYPT_MODE, privateKey);
+		byte[] decryptedBytes = cipher.doFinal(encryptedBytes);
+		return new String (decryptedBytes, "UTF8");
+	}
+				
+	
+	
+	private String encode (byte[] data) {
+		return Base64.getEncoder().encodeToString(data);
+	}
+	
+	private byte[] decode (String data) {
+		return Base64.getDecoder().decode(data);
+	}
+	
+	public static void main(String[] args) {
+		RSACipher rsa = new RSACipher();
+		rsa.init();
+		try {
+			String encryptedMessage = rsa.encrypt("Hello World");
+			String decryptredMessage = rsa.decrypt(encryptedMessage);
+			System.out.println(decryptredMessage);
+			rsa.printKeys();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+		
+	}
+}
+/********************************************************************************************************/
+
+when we print without encoding
+
+public key :
+Sun RSA public key, 1024 bits
+  params: null
+  modulus: 93660511548604382586559254949446734036660980183646620610734649736234780984384590603988650370559974632463826335978744097566134748765208721638548190400700951502297061645826641397112626916684969807532196156170820946711438327976187817947340552372927554847468870238533947279432326134154378100820045182009752907151
+  public exponent: 65537
+private key :
+SunRsaSign RSA private CRT key, 1024 bits
+  params: null
+  modulus: 93660511548604382586559254949446734036660980183646620610734649736234780984384590603988650370559974632463826335978744097566134748765208721638548190400700951502297061645826641397112626916684969807532196156170820946711438327976187817947340552372927554847468870238533947279432326134154378100820045182009752907151
+  private exponent: 7417154507183068276305637017068656631372667152190761874509251752919091708637197693435785822103640208469830152184715227525950826954108873846896640190726426850840825144910714015005619515676154714791339959867239188014065628134345186121359800297662379468436041767561670394862815958661435358586215093084893245953
+
+
+
+*********************************************************************************************/
+Hello World
+public key :
+MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCb7vuXYMLbHD1O39CFem+aQjre/0LoxkWw6UMCdWv/WSylN7FmLYrWzNFY6b4Cf9bc5xDq85e1i1Tn1QgPOb3w+dCOuqPOZUBd99feMJC6uQ3qzbTz7O52FmhTHePPgnSlb6JOFwD35g3xoUF8I0Gz/YQZXxeO1LtispSWy8xZhQIDAQAB
+private key :
+MIICeAIBADANBgkqhkiG9w0BAQEFAASCAmIwggJeAgEAAoGBAJvu+5dgwtscPU7f0IV6b5pCOt7/QujGRbDpQwJ1a/9ZLKU3sWYtitbM0VjpvgJ/1tznEOrzl7WLVOfVCA85vfD50I66o85lQF33194wkLq5DerNtPPs7nYWaFMd48+CdKVvok4XAPfmDfGhQXwjQbP9hBlfF47Uu2KylJbLzFmFAgMBAAECgYASPRo1Yw53lW6AVsJrkl4SY3PCWIYJdwN4xVfepkBbDiGgM4ru4h3OsQc9iJ1+aliF3wsGCDby95iXQz4dlcnnAjbsjl+Y/XY7ZDzcvBVRdebXVHOQgTBafiUwsVHb/0XyhjKzmO6CQBVfUabEyfleHp0uM4MviIJaPlH88DMRUwJBAN52nzz/ckfQn825FDDfwJSRN1/xkSqRkcFZ/v34yxw2dusyJgnktoWByeFCBrZ71udgds5OqzBQTGQh4feYjj8CQQCzcNHXcJVSLb1hd1+3dAKzjBJ7V6aHWy7Bkkh8Vz6Jvr9z6oLNK2C7tyxOzEOW4WmaNj4z9pc1R2lOsNkw+i87AkEAwowYa/61EUrIRd/CYY972jE4rQYTvpd5UQ8EKVTHQ0/6JWtAyswiNpUvWHgmaLXaVZQNshQoL2M5uyPKen4GfwJBAIh4bm+OhVIpzVV6R4arqX5KMqgyAkoBdC7uBUjjxYFXXB5Zpb9KlVhOuFj5ixIOP5V0WZyFl3yC4jlh0N0p+Y8CQQCK4ZMt/MJ3ZbqUbuAtUjCsQR/4moTX19xQ4mkcYgxLkiZGqccGdkDHREiyHOz9u93E94IowBYolawwgDcdKgAI
+
+
+
+ this provides long keys , so we are using different encoding specs to shorten the length
+/************************************************************************************************/
+
+vANyIm3Q5tYkFqR1UUYynu881uD/p6+iQxe+hsPaJpwIeFNeNubYiIGu7fe8AHbO0kV1Tg1AWN8eIAY5G55phcqNa+BzBFrvtkRw0PmJsLlQ2bkCZk6UFRXKrnJVIKkfYizGEgkCWBmDqTD0liqDuvlXnOmWk7+a6E41N3A1d3VU=     => pass
+
+

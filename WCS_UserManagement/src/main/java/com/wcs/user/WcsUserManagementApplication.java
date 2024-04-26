@@ -1,0 +1,13 @@
+package com.wcs.user;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class WcsUserManagementApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(WcsUserManagementApplication.class, args);
+	}
+
+}

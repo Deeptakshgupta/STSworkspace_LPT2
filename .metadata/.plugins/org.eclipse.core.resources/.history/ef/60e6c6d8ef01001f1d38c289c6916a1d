@@ -1,0 +1,24 @@
+spring.application.name=JWTUserManagement
+
+#swagger setting........
+spring.mvc.pathmatch.matching-strategy=ant-path-matcher
+
+#Jpa setting............
+spring.datasource.url= jdbc:oracle:thin:@//192.168.55.81:1521/p1usutf
+spring.datasource.username=wcs
+spring.datasource.password=wcsecs
+spring.datasource.driver-class-name=oracle.jdbc.OracleDriver
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.Oracle10gDialect
+spring.datasource.hikari.maximum-pool-size=10
+spring.jpa.hibernate.ddl-auto=create-drop
+
+
+logging.level.org.springframework.web=DEBUG
+
+
+
+
+
+user.management.issuer="newgensoft"
+user.management.jwtExpirationMs=86400000
+user.management.secretKey="NewgenSecretKey"

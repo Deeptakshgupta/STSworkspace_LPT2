@@ -1,0 +1,44 @@
+package com.wcs.user.service;
+
+import java.security.SecureRandom;
+
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import com.wcs.user.entity.User;
+import com.wcs.user.repository.UserRepository;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+public class PasswordHandlingService {
+
+	private final PasswordEncoder passwordEncoder;
+	private final UserRepository userRepository;
+	
+	private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_=+";
+
+    public  String generateTempPassword(int length) {
+        SecureRandom random = new SecureRandom();
+        StringBuilder password = new StringBuilder();
+
+        for (int i = 0; i < 11; i++) {
+            int randomIndex = random.nextInt(CHARACTERS.length());
+            password.append(CHARACTERS.charAt(randomIndex));
+        }
+
+        return password.toString();
+    }
+    
+    
+    private String changePassword(String userName, String newPassword, String oldPassword) throws Exception
+    {
+    	User user =userRepository.findByUsername(userName).orElseThrow();
+    	if (!user.getTempPass().equals(oldPassword)) {
+    	    throw new Exception("Temporary password does not match old password");
+    	}
+    	return passwordEncoder.encode(newPassword);
+    }
+    
+}

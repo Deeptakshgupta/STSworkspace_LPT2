@@ -1,0 +1,11 @@
+package com.newgen.o2ms.repository;
+
+import com.newgen.o2ms.entities.User;
+import org.springframework.data.repository.CrudRepository;
+
+import java.util.Optional;
+
+public interface UserRepository extends CrudRepository<User,Long> {
+    Optional<User> findByUserId(String userId);
+    Boolean existsByUserId(String UserId);
+}

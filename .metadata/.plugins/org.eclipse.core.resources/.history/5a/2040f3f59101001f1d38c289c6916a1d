@@ -1,0 +1,8 @@
+package com.newgen.o2ms.repository;
+
+import com.newgen.o2ms.entities.Address;
+import org.springframework.data.repository.CrudRepository;
+
+public interface AddressRepository extends CrudRepository<Address, String> {
+
+}

@@ -1,0 +1,13 @@
+package com.wcs.user.service;
+
+import com.wcs.user.model.Deep_user;
+
+public interface UserService {
+
+	public void createUser(String username, String password);
+
+	public Deep_user getUserByUsername(String username);
+
+	public boolean authenticateUser(String username, String password);
+
+}

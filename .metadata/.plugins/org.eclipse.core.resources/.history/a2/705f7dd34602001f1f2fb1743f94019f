@@ -1,0 +1,6 @@
+package com.wcs.user.service;
+
+
+public class NewUserServiceImpl {
+
+}

@@ -1,0 +1,8 @@
+package com.newgen.o2ms.services;
+
+import com.newgen.o2ms.dto.request.AddressRequest;
+import com.newgen.o2ms.entities.Address;
+
+public interface AddressRegistrationService {
+    Address saveAddress(AddressRequest addressRequest);
+}

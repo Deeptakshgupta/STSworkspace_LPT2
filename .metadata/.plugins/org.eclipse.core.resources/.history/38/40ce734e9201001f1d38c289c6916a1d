@@ -1,0 +1,32 @@
+package com.newgen.o2ms.services.impl;
+
+
+import com.newgen.o2ms.dto.request.AddressRequest;
+import com.newgen.o2ms.entities.Address;
+import com.newgen.o2ms.repository.AddressRepository;
+import com.newgen.o2ms.services.AddressRegistrationService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Slf4j
+@Service
+public class AddressRegistrationServiceImpl implements AddressRegistrationService {
+    @Autowired
+    AddressRepository addressRepository;
+    @Override
+    public Address saveAddress(AddressRequest addressRequest) {
+        log.info("Address request");
+        Address address = Address.builder()
+                .address(addressRequest.getAddress())
+                .city(addressRequest.getCity())
+                .state(addressRequest.getState())
+                .pin(addressRequest.getPin())
+                .UserId(addressRequest.getUserId())
+                .contact(addressRequest.getContact())
+                .build();
+        address = addressRepository.save(address);
+        log.info("User's address registered successfully with id :  {}", address.getUserId());
+        return address;
+    }
+}

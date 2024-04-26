@@ -1,0 +1,63 @@
+package com.wcs.user.service;
+
+import java.security.InvalidKeyException;
+import java.security.KeyPair;
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
+import java.security.PrivateKey;
+import java.security.PublicKey;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.wcs.user.model.Deep_user;
+import com.wcs.user.security.RSACipherUtility;
+import com.wcs.user.security.UserRepository;
+
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
+public class UserServiceImpl implements UserService {
+
+	private final UserRepository userRepository;
+
+	private RSACipherUtility rsaCipherUtility;
+
+	KeyPair keyPair = rsaCipherUtility.getKeyPair();
+	// Get public key from the key pair.
+	PublicKey pubKey = keyPair.getPublic();
+
+	// Get private key from the key pair.
+	PrivateKey privKey = keyPair.getPrivate();
+
+	@Override
+	public void createUser(String username, String password) {
+		Deep_user user = new Deep_user();
+		user.setUserName(username);
+		try {
+			user.setPassword(rsaCipherUtility.encrypt(password, pubKey));
+		} catch (InvalidKeyException | NoSuchAlgorithmException | NoSuchProviderException | NoSuchPaddingException
+				| IllegalBlockSizeException | BadPaddingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		userRepository.save(user);
+	}
+
+	@Override
+	public Deep_user getUserByUsername(String username) {
+		return userRepository.findByUserName(username);
+	}
+
+	public boolean authenticateUser(String username, String password) {
+		Deep_user user = userRepository.findByUserName(username);
+		if (user != null && RSACipherUtility.decrypt(user.getPassword()).equals(password)) {
+			return true;
+		}
+		return false;
+	}
+
+}

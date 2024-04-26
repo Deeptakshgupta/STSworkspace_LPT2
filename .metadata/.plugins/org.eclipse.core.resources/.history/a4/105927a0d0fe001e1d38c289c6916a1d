@@ -1,0 +1,5 @@
+package com.wcs.user.controller;
+
+public class UserManageController {
+
+}

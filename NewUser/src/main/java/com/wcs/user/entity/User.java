@@ -1,0 +1,97 @@
+package com.wcs.user.entity;
+
+import jakarta.persistence.*;
+import lombok.Data;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.time.Instant;
+import java.util.Collection;
+import java.util.List;
+
+@Data
+@Entity
+@Table(name = "usermaster")
+public class User implements UserDetails {
+
+    private static final long serialVersionUID = 1L;
+	@Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "USERID" )
+    private Integer id;
+	
+	@Column(name = "USERACNO" )
+	private Long userAccNo;
+	
+	@Column(name = "ROLEID" )
+	private String roleId;
+	
+	@Column(name = "USERNAME" )
+    private String username;
+	
+	@Column(name = "EMAILID" )
+    private String email;
+	
+	@Column(name = "PHONENUMBER" )
+    private String phoneNumber;
+	
+	@Column(name = "NEWUSERFLAG" )
+    private char newUserFlag;
+	
+	@Column(name = "TEMPPASS" )
+    private String tempPass;
+	
+	@Column(name = "PASSWORD" )
+    private String password;
+	
+	@Column(name = "CREATION_DATE" )
+    private Instant creationDate;
+	
+	@Column(name = "AUTHOR" )
+    private String author;
+	
+	@Column(name = "STATUS" )
+    private String status;
+	
+	@Column(name = "ROLENAME" )
+    private String role;
+    
+    public User() {
+    	super();
+        this.author = "Super_User";
+        this.newUserFlag = 'N';
+    }
+    
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(role));
+    }
+
+
+    @Override
+    public String getUsername() {
+        return username;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+}
+

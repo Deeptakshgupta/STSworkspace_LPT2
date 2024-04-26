@@ -1,0 +1,16 @@
+package com.wcs.user.service;
+
+import org.springframework.stereotype.Service;
+
+import com.wcs.user.repository.UserRepository;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+public class NewUserServiceImpl {
+	private final UserRepository userRepository;
+	
+	
+
+}

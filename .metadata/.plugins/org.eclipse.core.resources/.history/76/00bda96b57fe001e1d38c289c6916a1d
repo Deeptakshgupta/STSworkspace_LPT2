@@ -1,0 +1,18 @@
+package com.wcs.user.service;
+
+
+import com.wcs.Deep_user.model.Deep_Deep_user;
+import com.wcs.user.model.Deep_user;
+import com.wcs.user.security.AESEncryptionUtil;
+import com.wcs.user.security.UserRepository;
+
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
+public class UserServiceImpl implements Deep_userService{
+	
+	private final UserRepository userRepository;
+
+	
+
+}

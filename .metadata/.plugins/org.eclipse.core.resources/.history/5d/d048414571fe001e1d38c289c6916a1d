@@ -1,0 +1,85 @@
+package com.wcs.user.security;
+
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+import java.security.NoSuchAlgorithmException;
+import java.security.PrivateKey;
+import java.security.PublicKey;
+import java.util.Base64;
+
+import javax.crypto.Cipher;
+
+public class RSACipher {
+
+	private PublicKey publicKey;
+	private PrivateKey privateKey;
+	
+	public RSACipher() {
+		try {
+			KeyPairGenerator generator = KeyPairGenerator.getInstance("RSA");
+			generator.initialize(1024);
+			KeyPair pair = generator.generateKeyPair();
+			
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+	}
+	
+	public  void init() {
+		KeyPairGenerator generator;
+		try {
+			generator = KeyPairGenerator.getInstance("RSA");
+			generator.initialize(1024);
+			KeyPair pair = generator.generateKeyPair();
+			
+			privateKey= pair.getPrivate();
+			publicKey = pair.getPublic();
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
+	public  void printKeys() {
+		System.err.println("public key :"+publicKey);
+		System.err.println("private key :"+privateKey);
+	}
+	
+	public String encrypt(String message) throws Exception{
+		byte[] messageToBytes = message.getBytes();
+		Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
+		cipher.init(Cipher.ENCRYPT_MODE, publicKey);
+		byte[] encryptedBytes = cipher.doFinal(messageToBytes);
+		return encode(encryptedBytes);
+				
+	}
+	
+	public String decrypt(String encryptedMessage) throws Exception{
+		byte[] encryptedBytes = decode(encryptedMessage);
+		Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
+		cipher.init(Cipher.DECRYPT_MODE, privateKey);
+		byte[] decryptedBytes = cipher.doFinal(encryptedBytes);
+		return new String (decryptedBytes, "UTF8");
+	}
+				
+	
+	
+	private String encode (byte[] data) {
+		return Base64.getEncoder().encodeToString(data);
+	}
+	
+	private byte[] decode (String data) {
+		return Base64.getDecoder().decode(data);
+	}
+	
+	public static void main(String[] args) {
+		RSACipher rsa = new RSACipher();
+		rsa.init();
+		rsa.printKeys();
+		
+	}
+}

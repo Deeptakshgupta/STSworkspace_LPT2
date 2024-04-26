@@ -1,0 +1,5 @@
+package com.mailService.controller;
+
+public class EmailController {
+
+}

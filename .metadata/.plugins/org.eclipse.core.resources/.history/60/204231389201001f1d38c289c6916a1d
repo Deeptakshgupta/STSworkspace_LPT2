@@ -1,0 +1,9 @@
+package com.newgen.o2ms.services;
+
+import com.newgen.o2ms.entities.Component;
+
+import java.util.List;
+
+public interface ComponentService {
+   //// List<Component> getComponents();
+}
