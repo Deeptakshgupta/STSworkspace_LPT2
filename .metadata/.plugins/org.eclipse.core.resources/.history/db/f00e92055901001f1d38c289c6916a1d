@@ -1,7 +1,0 @@
-spring.application.name=SessionManagement
-
-
-
-spring.session.store-type=jdbc
-spring.session.jdbc.initialize-schema=always
-spring.session.timeout.seconds=900

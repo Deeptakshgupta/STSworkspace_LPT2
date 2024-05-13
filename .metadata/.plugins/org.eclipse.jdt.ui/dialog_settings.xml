@@ -25,6 +25,8 @@
 		<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>
 	</section>
 	<section name="completion_proposal_size">
+		<item key="contextSelector.size.x" value="331"/>
+		<item key="contextSelector.size.y" value="221"/>
 	</section>
 	<section name="quick_assist_proposal_size">
 	</section>
@@ -80,8 +82,44 @@
 	<section name="JavaSearchPage">
 		<item key="CASE_SENSITIVE" value="false"/>
 		<item key="INCLUDE_MASK" value="13"/>
-		<item key="HISTORY_SIZE" value="2"/>
+		<item key="HISTORY_SIZE" value="5"/>
 		<section name="HISTORY0">
+			<item key="searchFor" value="0"/>
+			<item key="scope" value="0"/>
+			<item key="pattern" value="user"/>
+			<item key="limitTo" value="2"/>
+			<item key="matchLocations" value="0"/>
+			<item key="javaElement" value=""/>
+			<item key="isCaseSensitive" value="false"/>
+			<item key="includeMask" value="13"/>
+			<list key="workingSets">
+			</list>
+		</section>
+		<section name="HISTORY1">
+			<item key="searchFor" value="0"/>
+			<item key="scope" value="0"/>
+			<item key="pattern" value="{id}/user"/>
+			<item key="limitTo" value="2"/>
+			<item key="matchLocations" value="0"/>
+			<item key="javaElement" value=""/>
+			<item key="isCaseSensitive" value="false"/>
+			<item key="includeMask" value="13"/>
+			<list key="workingSets">
+			</list>
+		</section>
+		<section name="HISTORY2">
+			<item key="searchFor" value="0"/>
+			<item key="scope" value="0"/>
+			<item key="pattern" value="Token"/>
+			<item key="limitTo" value="2"/>
+			<item key="matchLocations" value="0"/>
+			<item key="javaElement" value=""/>
+			<item key="isCaseSensitive" value="false"/>
+			<item key="includeMask" value="13"/>
+			<list key="workingSets">
+			</list>
+		</section>
+		<section name="HISTORY3">
 			<item key="searchFor" value="0"/>
 			<item key="scope" value="3"/>
 			<item key="pattern" value="javax"/>
@@ -93,7 +131,7 @@
 			<list key="workingSets">
 			</list>
 		</section>
-		<section name="HISTORY1">
+		<section name="HISTORY4">
 			<item key="searchFor" value="0"/>
 			<item key="scope" value="0"/>
 			<item key="pattern" value="USER"/>
@@ -118,9 +156,26 @@
 		<item key="org.eclipse.jdt.internal.ui.text.JavaOutlineInformationControlDIALOG_USE_PERSISTED_LOCATION" value="false"/>
 	</section>
 	<section name="org.eclipse.ltk.ui.refactoring.settings">
-		<item key="renameSubpackages" value="false"/>
-		<item key="updateTextualMatches" value="false"/>
+		<item key="renameSubpackages" value="true"/>
+		<item key="updateTextualMatches" value="true"/>
 		<item key="updateQualifiedNames" value="false"/>
 		<item key="patterns" value="*"/>
+	</section>
+	<section name="SourceActionDialog.methods">
+		<item key="VisibilityModifier" value="1"/>
+		<item key="FinalModifier" value="false"/>
+		<item key="SynchronizedModifier" value="false"/>
+		<item key="Comments" value="false"/>
+	</section>
+	<section name="AddGetterSetterDialog">
+		<item key="SortOrdering" value="false"/>
+		<item key="RemoveFinal" value="false"/>
+	</section>
+	<section name="DialogBounds_GetterSetterTreeSelectionDialog">
+		<item key="DIALOG_X_ORIGIN" value="428"/>
+		<item key="DIALOG_Y_ORIGIN" value="8"/>
+		<item key="DIALOG_WIDTH" value="526"/>
+		<item key="DIALOG_HEIGHT" value="696"/>
+		<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>
 	</section>
 </section>

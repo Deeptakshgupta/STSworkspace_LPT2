@@ -31,7 +31,7 @@ public class User implements UserDetails {
     @Column(name = "password")
     private String password;
 
-    @Enumerated(value = EnumType.STRING)
+   @ManyToOne
     private Role role;
 
 
@@ -92,7 +92,7 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role.name()));
+        return List.of(new SimpleGrantedAuthority(role.getRole()));
     }
 
     public String getPassword() {

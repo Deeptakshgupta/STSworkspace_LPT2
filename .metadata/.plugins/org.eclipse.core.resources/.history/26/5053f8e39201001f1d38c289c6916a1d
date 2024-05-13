@@ -1,7 +1,0 @@
-package com.wcs.auth.service;
-
-import com.newgen.o2ms.dto.request.LoginRequest;
-
-public interface AuthService {
-    String login(LoginRequest loginRequest);
-}

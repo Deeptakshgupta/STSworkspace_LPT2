@@ -1,8 +1,0 @@
-package com.newgen.o2ms.services;
-
-import com.newgen.o2ms.dto.request.SignupRequest;
-import com.newgen.o2ms.entities.User;
-
-public interface UserRegistrationService {
-    User register(SignupRequest signupRequest);
-}

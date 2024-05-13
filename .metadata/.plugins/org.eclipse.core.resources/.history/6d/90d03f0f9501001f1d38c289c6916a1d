@@ -1,8 +1,0 @@
-package com.wcs.auth.service;
-
-import com.wcs.auth.dto.request.SignupRequest;
-import com.wcs.auth.model.User;
-
-public interface UserRegistrationService {
-    User register(SignupRequest signupRequest);
-}
